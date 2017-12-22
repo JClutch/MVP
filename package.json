@@ -4,16 +4,32 @@
   "description": "My Project --- Welcome.",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
+    "compile": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "webpack": "^3.10.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-slick": "^0.16.0",
+    "sequelize": "^4.28.6",
+    "slick-carousel": "^1.8.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-middleware": "^2.0.1"
+  },
+  "devDependencies": {
+    "file-loader": "^1.1.6"
   }
 }
