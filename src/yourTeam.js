@@ -52,6 +52,7 @@ class yourTeam extends Component {
   }
 
   componentDidMount(){
+  	console.log('unmounting')
   	if(this.state.myTeam === ''){
   	    this.league()
   	}
@@ -84,8 +85,9 @@ class yourTeam extends Component {
   		{this.state.roster.map((foo, key)=>{
   			var string = ""+foo.player.JerseyNumber+ ' | ' + foo.player.FirstName+" "+foo.player.LastName+" | "+foo.player.Height+" | "+foo.player.Position+" | "+foo.player.Weight
   			var val = ""+foo.player.FirstName+"-"+foo.player.LastName
+  			var key = key
   			return(
-  				<Link to={{pathname:"/yourplayer", player:val}}><div key={key}>{`${string}`}</div>
+  				<Link to={{pathname:"/yourplayer/"+val, player:val}}><div key={key}>{`${string}`}</div>
   				</Link>
   				)
   		}

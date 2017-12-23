@@ -14,7 +14,6 @@ const MyRoute = () => (
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/yourteam">Your Team</Link></li>
-        <li><Link to="/yourplayer">Player</Link></li>
 
       </ul>
 
@@ -22,7 +21,7 @@ const MyRoute = () => (
 
       <Route exact path="/" component={Home}/>
       <Route path="/yourteam" component={yourTeam}/>
-      <Route path="/yourplayer" component={yourplayer}/>
+      <Route path="/yourplayer/:id" component={yourplayer}/>
     </div>
   </Router>
 )
