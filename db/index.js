@@ -54,7 +54,11 @@ const Teams = sequelize.define('teams', {
 	},
 	losses: {
 		type: Sequelize.INTEGER
+	},
+	rank: {
+		type: Sequelize.INTEGER
 	}
+
 })
 
 Teams.sync({force: false})

@@ -17,17 +17,39 @@ app.use(express.static(__dirname + '/www'));
 app.get('/team', function(req, res){
   axios.get('https://api.mysportsfeeds.com/v1.1/pull/nba/2017-2018-regular/overall_team_standings.json?teamstats=W,L', authorize).then((response) => {
 
-    console.log("Heyya response", response.data.overallteamstandings.teamstandingsentry);
-
     response.data.overallteamstandings.teamstandingsentry.forEach((entry)=>{
-      db.Teams.findOrCreate({where:{name:entry.team.Name, city:entry.team.City, wins:entry.stats.Wins["#text"], losses:entry.stats.Losses["#text"]}}).spread((Teams, created) => {
+      db.Teams.findOrCreate({where:{name:entry.team.Name, city:entry.team.City, wins:entry.stats.Wins["#text"], losses:entry.stats.Losses["#text"], rank:entry.rank}}).spread((Teams, created) => {
         console.log(Teams.get({
           plain: true
         }))
       })
     })
-    res.status(200).end('recieved request')
+    res.json(response.data.overallteamstandings.teamstandingsentry)
+
   })  
+})
+
+app.post('/myTeam', function(req, res){
+  var teamName = req.body.myTeam
+  if(teamName === "Portland Trail Blazers"){
+    //FUCK RIP-CITY for making me hardcode them >.>
+    teamName = 'portland-trailblazers'
+  } else{
+  teamName = teamName.toLowerCase().split(' ')
+  if(teamName.length===2){
+    teamName = teamName.join('-')
+  } else{
+    teamName = teamName[0]+teamName[1]+'-'+teamName[2]
+  }
+}
+
+  var city = teamName.split('-')[0]
+  
+
+  console.log("MYYYY REQUEST", teamName)
+  axios.get('https://api.mysportsfeeds.com/v1.1/pull/nba/2017-2018-regular/roster_players.json?team='+teamName, authorize).then((response)=>{
+    res.json(response.data.rosterplayers.playerentry)
+  })
 })
 
 app.get('/today', function(req, res){
@@ -45,7 +67,6 @@ app.get('/today', function(req, res){
     mm = '0'+mm
   } 
   today = ""+ yyyy + mm + dd;
-  console.log("DAAAAATTTEE", today)
   axios.get('https://api.mysportsfeeds.com/v1.1/pull/nba/2017-2018-regular/daily_game_schedule.json?fordate='+today, authorize).then((response) => {
 
     console.log("Heyya response today's games", response.data.dailygameschedule.gameentry);
