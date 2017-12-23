@@ -80,7 +80,7 @@ class yourTeam extends Component {
   		</div>
   		<Router>
   		<div id="RASTA" style={{float:'right',width:'35%', backgroundColor:"rgba(52, 73, 94, 0.5)"}}>
-  		YOUR TEAMS ROSTER
+  		<div style={{fontSize:'2em',fontFamily: "Comic Sans MS"}}>Your Teams Roster</div>
   		<ul>
   		{this.state.roster.map((foo, key)=>{
   			var string = ""+foo.player.JerseyNumber+ ' | ' + foo.player.FirstName+" "+foo.player.LastName+" | "+foo.player.Height+" | "+foo.player.Position+" | "+foo.player.Weight
@@ -98,7 +98,7 @@ class yourTeam extends Component {
   		</Router>
 
   		<div id="schedule" style={{float:'left',width:'35%', backgroundColor:"rgba(52, 73, 94, 0.5)"}}>
-  		YOUR TEAMS SCHEDULE
+  		<div style={{fontSize:'2em',fontFamily: "Comic Sans MS"}}>Your Teams Schedule</div>
   		{this.state.schedule.map((foo, key)=>{
   			return(<div key={key}>
   				  		<p>
@@ -113,9 +113,9 @@ class yourTeam extends Component {
 
   		<div id="standing" style={{margin:'0% auto',width:'25%',backgroundColor:"rgba(52, 73, 94, 0.5)"}}>
   		<p style={{textAlign:'center'}}>
-  		Wins - Losses <br></br>
+  		<div style={{fontFamily: "Comic Sans MS"}}>Wins - Losses</div> <br></br>
   		{this.state.standing.wins} - {this.state.standing.losses} <br></br>
-  		Overall Ranking <br></br>
+  		<div style={{fontFamily: "Comic Sans MS"}}>Overall Ranking </div><br></br>
   		{this.state.standing.rank}
   		</p>
   		</div>

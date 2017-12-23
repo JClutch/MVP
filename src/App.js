@@ -11,11 +11,11 @@ import yourplayer from './youplayer.js';
 const MyRoute = () => (
   <Router>
     <div>
-      <ul style={{backgroundColor:'rgba(230, 126, 34, .90)'}}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/yourteam">Your Team</Link></li>
 
-      </ul>
+        <div style={{fontFamily: "Comic Sans MS", backgroundColor:'rgba(230, 126, 34, .80)', textAlign:'center'}}><Link to="/">Home</Link></div>
+        <div style={{fontFamily: "Comic Sans MS", backgroundColor:'rgba(230, 126, 34, .80)', textAlign:'center'}}><Link to="/yourteam">Your Team</Link></div>
+
+
 
       <hr/>
 

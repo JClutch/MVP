@@ -10,7 +10,7 @@ export default class Nav extends React.Component {
 
     return (
       <div id='todaysGames'>
-      Games Being Played Today
+      <div style={{fontSize:'2em',fontFamily: "Comic Sans MS"}}>Games Being Played Today</div>
       {this.props.Games.map((foo, key)=>{
         return(
         <Game game={foo} key={key} />
