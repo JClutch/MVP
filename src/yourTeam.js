@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import yourplayer from './youplayer.js';
+import {
+  HashRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 var axios = require('Axios')
 
@@ -10,7 +16,9 @@ class yourTeam extends Component {
       teams: [],
       myTeam: '',
       roster: [],
-      flag: false
+      flag: false,
+      schedule: [],
+      standing: {wins: 0, losses: 0, rank: 0}
     }
     this.league = this.league.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -26,18 +34,20 @@ class yourTeam extends Component {
   }
 
   handleChange(event) {
-  	console.log("CHANGING TEAMS", event.target.value)
   	console.log("MYYY RASTAAAA", this.state.roster)
     this.setState({myTeam: event.target.value, flag: true});
     //setState should be async
-    console.log(this.state.myTeam)
   }
 
   componentDidUpdate(){
   	if(this.state.myTeam !== '' && this.state.roster.length === 0){
-  	  axios.post('/myTeam',{myTeam: this.state.myTeam}).then((response)=>{this.setState({roster:response.data})})
+  	  axios.post('/myTeam',{myTeam: this.state.myTeam}).then((response)=>{
+  	  	console.log('RESSSSPONSEEE', response.data[2]);
+  	  	this.setState({roster:response.data[0], flag:false, schedule:response.data[1], standing:response.data[2]})})
     } else if(this.state.flag){
-    	axios.post('/myTeam',{myTeam: this.state.myTeam}).then((response)=>{this.setState({roster:response.data, flag:false})})
+    	axios.post('/myTeam',{myTeam: this.state.myTeam}).then((response)=>{
+    		console.log("RESPPONSEEE", response.data[2]);
+    		this.setState({roster:response.data[0], flag:false, schedule:response.data[1], standing:response.data[2]})})
     }
   }
 
@@ -53,7 +63,9 @@ class yourTeam extends Component {
   	else{
 
   	return(
-  		<div id="all">
+
+
+  		<div id="all" style={{width:'90%',margin:'auto 0%'}}>
   		<div style={{width:"25%",margin:"0% auto"}}>
   		<select value={this.state.myTeam} onChange={this.handleChange}>
 
@@ -65,15 +77,51 @@ class yourTeam extends Component {
   	}
   	    </select>
   		</div>
-
-  		<div id="RASTA" style={{float:'right',width:'40%'}}>
+  		<Router>
+  		<div id="RASTA" style={{float:'right',width:'35%'}}>
+  		YOUR TEAMS ROSTER
+  		<ul>
   		{this.state.roster.map((foo, key)=>{
   			var string = ""+foo.player.JerseyNumber+ ' | ' + foo.player.FirstName+" "+foo.player.LastName+" | "+foo.player.Height+" | "+foo.player.Position+" | "+foo.player.Weight
-  			return(<div key={key}>{`${string}`}</div>)
+  			var val = ""+foo.player.FirstName+"-"+foo.player.LastName
+  			return(
+  				<Link to={{pathname:"/yourplayer", player:val}}><div key={key}>{`${string}`}</div>
+  				</Link>
+  				)
+  		}
+
+  			)}
+  		</ul>
+  		// <Route path="/yourplayer" component={yourplayer}/>
+  		</div>
+  		</Router>
+
+  		<div id="schedule" style={{float:'left',width:'35%'}}>
+  		YOUR TEAMS SCHEDULE
+  		{this.state.schedule.map((foo, key)=>{
+  			return(<div key={key}>
+  				  		<p>
+  		{foo.homeTeam.City} {foo.homeTeam.Name} vs. {foo.awayTeam.City} {foo.awayTeam.Name} <br></br>
+  		{foo.time} | {foo.location} | {foo.date}
+  		</p>
+  				</div>)
   		}
 
   			)}
   		</div>
+
+  		<div id="standing" style={{margin:'0% auto',width:'25%'}}>
+  		<p style={{textAlign:'center'}}>
+  		Wins - Losses <br></br>
+  		{this.state.standing.wins} - {this.state.standing.losses} <br></br>
+  		Overall Ranking <br></br>
+  		{this.state.standing.rank}
+  		</p>
+  		</div>
+
+
+
+
   		</div>
 
   		)
@@ -82,9 +130,6 @@ class yourTeam extends Component {
 }
 
 export default yourTeam;
-//   <select>
-//   <option value="volvo">Volvo</option>
-//   <option value="saab">Saab</option>
-//   <option value="mercedes">Mercedes</option>
-//   <option value="audi">Audi</option>
-// </select>
+
+
+//<Link to={{ pathname: '/foo', query: { the: 'query' } }}/>
