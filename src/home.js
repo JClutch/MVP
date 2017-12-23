@@ -35,7 +35,7 @@ class Home extends Component {
     //
 
       return (
-        <div style={{textAlign:'center'}}>
+        <div style={{textAlign:'center',backgroundColor:"rgba(52, 73, 94, 0.75)"}}>
         
         <img src={require("./locker-room-logo.png")} id="logo" style={{margin:'auto', height:'auto', width:'30%'}}/>
           <div className="row">
@@ -43,7 +43,7 @@ class Home extends Component {
               <Today Games={this.state.todayGames} />
             </div>
             <div className="slide-menu">
-              Slide Out Menu
+            <br></br>
             </div>
           </div>
         </div>

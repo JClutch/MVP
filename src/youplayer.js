@@ -57,9 +57,9 @@ export default class Player extends React.Component {
     } else {
       console.log("player doesnt equal undef", this.state.stats)
       return(
-        <div>
-          <p>
-           {this.state.stats.player.LastName} {this.state.stats.player.LastName} <br></br>
+        <div style={{margin:'0% auto', width:'50%', backgroundColor:"rgba(52, 73, 94, 0.75)"}}>
+          <p style={{float:'center', textAlign:'center'}}>
+           {this.state.stats.player.FirstName} {this.state.stats.player.LastName} <br></br>
            PPG: {this.state.stats.stats.PtsPerGame['#text']} | APG: {this.state.stats.stats.AstPerGame['#text']} | RPG: {this.state.stats.stats.RebPerGame['#text']} | BPG: {this.state.stats.stats.BlkPerGame['#text']}<br></br>
           </p>
         </div>

@@ -79,7 +79,7 @@ class yourTeam extends Component {
   	    </select>
   		</div>
   		<Router>
-  		<div id="RASTA" style={{float:'right',width:'35%'}}>
+  		<div id="RASTA" style={{float:'right',width:'35%', backgroundColor:"rgba(52, 73, 94, 0.5)"}}>
   		YOUR TEAMS ROSTER
   		<ul>
   		{this.state.roster.map((foo, key)=>{
@@ -94,11 +94,10 @@ class yourTeam extends Component {
 
   			)}
   		</ul>
-  		// <Route path="/yourplayer" component={yourplayer}/>
   		</div>
   		</Router>
 
-  		<div id="schedule" style={{float:'left',width:'35%'}}>
+  		<div id="schedule" style={{float:'left',width:'35%', backgroundColor:"rgba(52, 73, 94, 0.5)"}}>
   		YOUR TEAMS SCHEDULE
   		{this.state.schedule.map((foo, key)=>{
   			return(<div key={key}>
@@ -112,7 +111,7 @@ class yourTeam extends Component {
   			)}
   		</div>
 
-  		<div id="standing" style={{margin:'0% auto',width:'25%'}}>
+  		<div id="standing" style={{margin:'0% auto',width:'25%',backgroundColor:"rgba(52, 73, 94, 0.5)"}}>
   		<p style={{textAlign:'center'}}>
   		Wins - Losses <br></br>
   		{this.state.standing.wins} - {this.state.standing.losses} <br></br>

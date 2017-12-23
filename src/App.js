@@ -11,7 +11,7 @@ import yourplayer from './youplayer.js';
 const MyRoute = () => (
   <Router>
     <div>
-      <ul>
+      <ul style={{backgroundColor:'rgba(230, 126, 34, .90)'}}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/yourteam">Your Team</Link></li>
 
