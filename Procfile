@@ -1,1 +1,1 @@
-web: npm install && webpack && node server.js
+web: npm install && node server.js
