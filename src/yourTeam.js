@@ -40,14 +40,17 @@ class yourTeam extends Component {
   }
 
   componentDidUpdate(){
+    console.log('yooooooo????')
   	if(this.state.myTeam !== '' && this.state.roster.length === 0){
+      console.log("inside update")
   	  axios.post('/myTeam',{myTeam: this.state.myTeam}).then((response)=>{
-  	  	console.log('RESSSSPONSEEE', response.data[2]);
+  	  	console.log('RESSSSPONSEEE', response.data);
   	  	this.setState({roster:response.data[0], flag:false, schedule:response.data[1], standing:response.data[2]})})
     } else if(this.state.flag){
     	axios.post('/myTeam',{myTeam: this.state.myTeam}).then((response)=>{
-    		console.log("RESPPONSEEE", response.data[2]);
+    		console.log("RESPPONSEEE", response.data);
     		this.setState({roster:response.data[0], flag:false, schedule:response.data[1], standing:response.data[2]})})
+      //, standing:response.data[2] << Add this when database working
     }
   }
 

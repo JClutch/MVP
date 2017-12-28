@@ -33,6 +33,7 @@ app.get('/team', function(req, res){
 })
 
 app.post('/myTeam', function(req, res){
+  console.log('recieved request')
   var teamName = req.body.myTeam
   var maCity = ''
   if(teamName === "Portland Trail Blazers"){
@@ -50,6 +51,16 @@ app.post('/myTeam', function(req, res){
 
   }
 }
+  function capitalizeCity(string) {
+  if(string.indexOf(" ") === -1){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  } else{
+    var br = string.indexOf(" ")
+    return string.charAt(0).toUpperCase() + string.slice(1, br) + string.charAt(br).toUpperCase() + string.slice(br+1)
+  }
+}
+
+  maCity = capitalizeCity(maCity)
 
 
 
@@ -61,9 +72,16 @@ app.post('/myTeam', function(req, res){
   var schedule = function(){
     return axios.get('https://api.mysportsfeeds.com/v1.1/pull/nba/2017-2018-regular/full_game_schedule.json?team='+teamName+'&date=since-today', authorize)
   }
+  console.log("JUST BEFORE DB", maCity)
+
+
+
+
   db.Teams.findOne({where:{city:maCity}}).then((stand)=> {
+    console.log('DB WORKED', stand)
 
     axios.all([roster(),schedule()]).then((response)=>{
+      console.log('inside AXIOS.ALL')
       var kanye = []
       kanye.push(response[0].data.rosterplayers.playerentry)
       kanye.push(response[1].data.fullgameschedule.gameentry)
@@ -104,9 +122,7 @@ app.use(webpackDevMiddleware(compiler, {
   },
   historyApiFallback: true,
 }));
+
+app.set('port', process.env.PORT || 3000)
  
-const server = app.listen(process.env.PORT || 3000, function() {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
-});
+const server = app.listen(app.get('port'))

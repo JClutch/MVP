@@ -25809,16 +25809,19 @@ var yourTeam = function (_Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
+      console.log('yooooooo????');
       if (this.state.myTeam !== '' && this.state.roster.length === 0) {
+        console.log("inside update");
         axios.post('/myTeam', { myTeam: this.state.myTeam }).then(function (response) {
-          console.log('RESSSSPONSEEE', response.data[2]);
+          console.log('RESSSSPONSEEE', response.data);
           _this3.setState({ roster: response.data[0], flag: false, schedule: response.data[1], standing: response.data[2] });
         });
       } else if (this.state.flag) {
         axios.post('/myTeam', { myTeam: this.state.myTeam }).then(function (response) {
-          console.log("RESPPONSEEE", response.data[2]);
+          console.log("RESPPONSEEE", response.data);
           _this3.setState({ roster: response.data[0], flag: false, schedule: response.data[1], standing: response.data[2] });
         });
+        //, standing:response.data[2] << Add this when database working
       }
     }
   }, {
