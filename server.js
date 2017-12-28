@@ -56,7 +56,7 @@ app.post('/myTeam', function(req, res){
     return string.charAt(0).toUpperCase() + string.slice(1);
   } else{
     var br = string.indexOf(" ")
-    return string.charAt(0).toUpperCase() + string.slice(1, br) + string.charAt(br).toUpperCase() + string.slice(br+1)
+    return string.charAt(0).toUpperCase() + string.slice(1, br+1) + string.charAt(br+1).toUpperCase() + string.slice(br+2)
   }
 }
 
